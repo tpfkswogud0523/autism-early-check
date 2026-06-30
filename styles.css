@@ -4,3 +4,7 @@
 .referral-panel{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start;margin-top:18px;padding:24px;border:1px solid var(--line);border-radius:8px;background:#fff;box-shadow:0 10px 30px rgba(26,67,74,.07)}
 .referral-panel h2{font-size:26px}.referral-panel p{color:var(--muted);line-height:1.65}.region-search{display:grid;gap:10px}.region-search label{font-weight:700}.region-search input{width:100%;min-height:46px;border:1px solid var(--line);border-radius:8px;padding:0 13px;color:var(--ink);background:#fbfefe}.search-buttons{display:grid;gap:8px}.search-buttons .ghost-button{width:100%}.basis-list{display:grid;gap:8px;margin:14px 0 0;padding:0;list-style:none}.basis-list li{padding:10px 12px;border-radius:8px;background:#fff;border:1px solid var(--line);color:var(--muted);line-height:1.55}.age-guidance{margin:14px 0 0;padding:14px;border-radius:8px;background:#fff;border:1px solid var(--line)}.age-guidance strong{display:block;margin-bottom:6px;color:var(--teal-dark)}
 @media (max-width:920px){.referral-panel{grid-template-columns:1fr}}
+
+.scale-toggle{grid-template-columns:repeat(4,minmax(0,1fr));width:min(520px,100%);border-radius:8px;background:#e9f0f0}
+.scale-toggle button{min-height:42px;border-radius:7px;padding:0 8px;font-size:13px;line-height:1.2;white-space:normal}
+@media (max-width:620px){.scale-toggle{grid-template-columns:1fr 1fr}.scale-toggle button{min-height:44px}}

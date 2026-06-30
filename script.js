@@ -10,3 +10,32 @@ function setStep(nextStep){state.step=Math.max(0,Math.min(3,nextStep));steps.for
 function updateNav(){const labels=["1. 아이 나이","2. 사회적 소통","3. 언어·행동","4. 결과"];stepLabel.textContent=labels[state.step];progressBar.style.width=`${(state.step+1)/4*100}%`;backButton.style.visibility=state.step===0?"hidden":"visible";nextButton.textContent=state.step===2?"결과 보기":"다음";nextButton.style.display=state.step===3?"none":"inline-flex";const socialComplete=questions.filter(q=>q.group==="social").every(q=>q.id in state.answers),behaviorComplete=questions.filter(q=>q.group==="behavior").every(q=>q.id in state.answers);nextButton.disabled=state.step===0&&!state.age||state.step===1&&!socialComplete||state.step===2&&!behaviorComplete}
 function summaryText(){const result=calculateResult(),ageLabel=ages.find(age=>age.id===state.age)?.label||"미선택",checked=questions.filter(q=>state.answers[q.id]===true).map(q=>q.title);return["아이 발달 신호 체크 결과",`나이: ${ageLabel}`,`권장 단계: ${result.level}`,`점수: ${result.total}점`,`체크된 신호: ${checked.length?checked.join(" / "):"없음"}`,"이 결과는 진단이 아니며, 걱정이 지속되면 전문기관 상담을 권합니다."].join("\n")}
 nextButton.addEventListener("click",()=>setStep(state.step+1));backButton.addEventListener("click",()=>setStep(state.step-1));restartButton.addEventListener("click",()=>{state.step=0;state.age="";state.answers={};renderAges();renderQuestions();setStep(0)});copyButton.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(summaryText());copyButton.textContent="복사 완료"}catch(error){copyButton.textContent="복사 제한됨";console.warn("Clipboard copy failed",error)}window.setTimeout(()=>{copyButton.textContent="결과 요약 복사"},1400)});renderAges();renderQuestions();setStep(0);
+
+// Official-source refinement: age-specific guidance and local referral search.
+const officialAgeGuidance = {
+  under12: "12개월 전후에는 자폐 특이 선별보다 발달 모니터링이 중심입니다. 이름 반응, 눈맞춤, 표정, 간단한 상호작용 놀이를 관찰하고 걱정되면 소아청소년과에 문의하세요.",
+  "12to18": "12~18개월에는 몸짓, 관심 공유, 보여주기, 가리키기 같은 사회적 의사소통 신호가 중요합니다. 걱정이 있으면 18개월 선별 시기까지 기다리지 않아도 됩니다.",
+  "18to24": "18~24개월은 AAP가 ASD 특이 선별을 권장하는 핵심 시기입니다. 공식 M-CHAT-R/F 또는 의료기관 선별을 함께 권합니다.",
+  "24to36": "24~36개월에는 언어, 두 단어 조합, 또래 관심, 상징놀이, 반복 행동을 함께 봐야 합니다. 의심 신호가 겹치면 전문 평가를 권합니다.",
+  over36: "36개월 이후에는 또래 놀이, 상상놀이, 대화 주고받기, 반복 관심, 감각 어려움이 생활에 미치는 영향을 함께 확인합니다."
+};
+
+const originalRenderResult = renderResult;
+renderResult = function renderResultWithOfficialGuidance() {
+  originalRenderResult();
+  const result = calculateResult();
+  const note = officialAgeGuidance[state.age] || "";
+  const officialScreening = ["18to24", "24to36"].includes(state.age)
+    ? "16~30개월 범위라면 M-CHAT-R/F 같은 검증된 자폐 선별 도구나 의료기관 평가를 함께 받아보는 것이 좋습니다."
+    : "이 결과는 공식 진단이 아니며, 걱정이 반복되면 나이와 점수에 관계없이 전문가 상담을 권합니다.";
+  resultCard.insertAdjacentHTML("beforeend", '<div class="age-guidance"><strong>선택 나이대 기준 안내</strong><p>' + note + '</p><p><strong>공식 선별 안내:</strong> ' + officialScreening + '</p><p><strong>판정 방향:</strong> 현재 단계는 ' + result.level + '이며, 진단명이 아니라 상담 필요도를 정리한 것입니다.</p></div>');
+};
+
+document.querySelectorAll("[data-search]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const regionInput = document.querySelector("#regionInput");
+    const region = (regionInput?.value || "").trim();
+    const query = encodeURIComponent((region + " " + button.dataset.search).trim());
+    window.open("https://map.naver.com/p/search/" + query, "_blank", "noopener,noreferrer");
+  });
+});

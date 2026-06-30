@@ -37,15 +37,15 @@
         <div>
           <p class="eyebrow">상담 연결</p>
           <h2>지역을 입력하면 상담처 검색어를 바로 만들 수 있어요</h2>
-          <p>정확한 예약 가능 여부와 전문성은 보호자가 직접 확인해야 합니다. 지역명을 입력하면 페이지 안에 구글 지도가 바로 표시되고, 네이버 지도와 카카오맵 링크도 함께 만들어집니다.</p>
+          <p>정확한 예약 가능 여부와 전문성은 보호자가 직접 확인해야 합니다. 지역명을 입력하면 페이지 안에 지도가 표시됩니다. 지도 안의 장소를 누르면 주소, 연락처, 업체 종류 같은 기본 정보를 확인할 수 있습니다.</p>
         </div>
         <div class="region-search">
           <label for="regionInput">지역명</label>
-          <input id="regionInput" type="text" placeholder="예: 서울 강남구, 부산 해운대구" />
+          <input id="regionInput" type="text" placeholder="예: 경기도 양주시, 서울 강남구" />
           <div class="search-buttons">
-            <button type="button" class="ghost-button" data-search="소아정신건강의학과 발달검사">발달 평가 병원 링크 만들기</button>
-            <button type="button" class="ghost-button" data-search="발달센터 언어치료 감각통합">발달·언어 센터 링크 만들기</button>
-            <button type="button" class="ghost-button" data-search="영유아 발달검사 K-DST 상담">영유아검진 상담 링크 만들기</button>
+            <button type="button" class="ghost-button" data-search="발달검사 병원">발달 평가 병원</button>
+            <button type="button" class="ghost-button" data-search="언어치료 발달센터">발달·언어 센터</button>
+            <button type="button" class="ghost-button" data-search="영유아검진 소아청소년과">영유아검진 상담</button>
           </div>
           <div id="mapResults" class="map-results" aria-live="polite"></div>
         </div>

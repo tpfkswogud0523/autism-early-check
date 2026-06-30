@@ -26,8 +26,7 @@
         <section class="tool-surface" aria-live="polite">
           <form id="screenForm">
             <div class="step active" data-step="0"><h2>아이의 현재 나이를 선택해 주세요</h2><p class="step-copy">나이에 따라 같은 행동도 의미가 달라질 수 있어요.</p><div class="age-grid" id="ageOptions"><button type="button" class="age-option" data-age="under12"><strong>12개월 전후</strong><span>이름 반응, 눈맞춤, 몸짓</span></button><button type="button" class="age-option" data-age="12to18"><strong>12~18개월</strong><span>가리키기, 관심 공유, 옹알이</span></button><button type="button" class="age-option" data-age="18to24"><strong>18~24개월</strong><span>자폐 선별 권고 시기</span></button><button type="button" class="age-option" data-age="24to36"><strong>24~36개월</strong><span>두 단어 표현, 상호작용</span></button><button type="button" class="age-option" data-age="over36"><strong>36개월 이상</strong><span>또래 관계, 반복 행동</span></button></div></div>
-            <div class="step" data-step="1"><h2>사회적 소통 신호</h2><p class="step-copy">사람과 관심을 나누는 모습이 얼마나 보이는지 확인합니다.</p><div class="question-list" id="socialQuestions"></div></div>
-            <div class="step" data-step="2"><h2>언어·행동·감각 신호</h2><p class="step-copy">언어 지연, 반복 행동, 변화에 대한 어려움을 함께 살펴봅니다.</p><div class="question-list" id="behaviorQuestions"></div></div>
+            <div class="step" data-step="1"><div id="questionStage" class="single-question-stage"></div></div>
             <div class="step" data-step="3"><h2>결과 확인</h2><div id="resultCard" class="result-card"></div><div class="next-actions"><button type="button" class="ghost-button" id="restartButton">다시 체크</button><button type="button" class="solid-button" id="copyButton">결과 요약 복사</button></div></div>
             <div class="nav-row"><button type="button" class="ghost-button" id="homeButton">처음으로</button><button type="button" class="ghost-button" id="backButton">이전</button><button type="button" class="solid-button" id="nextButton">다음</button></div>
           </form>

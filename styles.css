@@ -16,3 +16,5 @@
 .map-help{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.55}
 
 .flow-section{animation:sectionFade .34s ease both}.flow-section.is-hidden{display:none}.source-preview{max-width:620px;margin-top:18px;padding:16px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.82);color:var(--muted);line-height:1.6}.source-preview strong{display:block;color:var(--teal-dark);margin-bottom:6px}.source-preview p{margin:0}.step.active{animation:stepSlide .28s ease both}@keyframes sectionFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes stepSlide{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}@media (prefers-reduced-motion:reduce){.flow-section,.step.active{animation:none}.primary-link,.secondary-link,.solid-button,.ghost-button{transition:none}}
+
+.app-view.is-hidden{display:none}.landing-view{animation:sectionFade .34s ease both}.checker-view{min-height:calc(100vh - 56px);padding-top:32px;animation:sectionFade .34s ease both}.nav-row{gap:10px}.nav-row #homeButton{margin-right:auto}.nav-row #backButton{margin-right:0}

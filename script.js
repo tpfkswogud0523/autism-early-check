@@ -39,11 +39,10 @@ const questions = [
   { group: "behavior", id: "regression", title: "이전에 하던 말, 눈맞춤, 놀이, 사회적 반응이 줄거나 사라졌다", detail: "발달 퇴행은 나이와 점수에 관계없이 빠른 상담이 필요한 신호입니다.", weight: 5, urgent: true },
 ];
 
-const state = { step: 0, age: "", answers: {} };
+const state = { step: 0, age: "", answers: {}, questionIndex: 0 };
 
 const ageOptions = document.querySelector("#ageOptions");
-const socialQuestions = document.querySelector("#socialQuestions");
-const behaviorQuestions = document.querySelector("#behaviorQuestions");
+const questionStage = document.querySelector("#questionStage");
 const steps = [...document.querySelectorAll(".step")];
 const stepLabel = document.querySelector("#stepLabel");
 const progressBar = document.querySelector("#progressBar");
@@ -72,21 +71,21 @@ function renderAges() {
   });
 }
 
-function questionMarkup(question) {
+function questionMarkup(question, index) {
   const current = state.answers[question.id];
-  const selected = current !== undefined ? "selected" : "";
   const buttons = scaleOptions.map((option) => {
     const active = current === option.value ? "active" : "";
-    return '<button type="button" class="' + active + '" data-answer="' + option.value + '">' + option.label + '</button>';
+    return '<button type="button" class="' + active + '" data-answer="' + option.value + '"><span>' + option.label + '</span><small>' + option.value + '점</small></button>';
   }).join("");
-
-  return '<article class="question-card ' + selected + '" data-question="' + question.id + '"><div class="question-top"><div><h3>' + question.title + '</h3><p>' + question.detail + '</p></div><div class="toggle scale-toggle" role="group" aria-label="' + question.title + '">' + buttons + '</div></div></article>';
+  const groupLabel = question.group === "social" ? "사회적 소통" : "언어·행동·감각";
+  return '<div class="question-counter">문항 ' + (index + 1) + ' / ' + questions.length + ' · ' + groupLabel + '</div><article class="question-card selected single-question-card" data-question="' + question.id + '"><h2>' + question.title + '</h2><p class="step-copy">' + question.detail + '</p><div class="toggle scale-toggle" role="group" aria-label="' + question.title + '">' + buttons + '</div></article>';
 }
 
 function renderQuestions() {
-  socialQuestions.innerHTML = questions.filter((q) => q.group === "social").map(questionMarkup).join("");
-  behaviorQuestions.innerHTML = questions.filter((q) => q.group === "behavior").map(questionMarkup).join("");
-  document.querySelectorAll(".question-card button").forEach((button) => {
+  if (!questionStage) return;
+  const questionIndex = Math.max(0, Math.min(questions.length - 1, state.questionIndex || 0));
+  questionStage.innerHTML = questionMarkup(questions[questionIndex], questionIndex);
+  questionStage.querySelectorAll(".question-card button").forEach((button) => {
     button.addEventListener("click", () => {
       const card = button.closest(".question-card");
       state.answers[card.dataset.question] = Number(button.dataset.answer);
@@ -130,6 +129,7 @@ function beginCheckFlow() {
   checkerSection?.classList.remove("is-hidden");
   checkerSection?.setAttribute("aria-hidden", "false");
   resultOnlySections.forEach((section) => section.classList.add("is-hidden"));
+  state.questionIndex = 0;
   setStep(0);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -143,6 +143,7 @@ function returnHome() {
   state.step = 0;
   state.age = "";
   state.answers = {};
+  state.questionIndex = 0;
   renderAges();
   renderQuestions();
   updateNav();
@@ -150,28 +151,29 @@ function returnHome() {
 }
 
 function updateResultSections() {
-  const showResultSections = state.step === 3;
+  const showResultSections = state.step === 2;
   resultOnlySections.forEach((section) => section.classList.toggle("is-hidden", !showResultSections));
 }
 
 function setStep(nextStep) {
-  state.step = Math.max(0, Math.min(3, nextStep));
+  state.step = Math.max(0, Math.min(2, nextStep));
   steps.forEach((step, index) => step.classList.toggle("active", index === state.step));
-  if (state.step === 3) renderResult();
+  if (state.step === 2) renderResult();
   updateResultSections();
   updateNav();
 }
 
 function updateNav() {
-  const labels = ["1. 아이 나이", "2. 사회적 소통", "3. 언어·행동", "4. 결과"];
-  stepLabel.textContent = labels[state.step];
-  progressBar.style.width = ((state.step + 1) / 4) * 100 + "%";
+  const labels = ["1. 아이 나이", "2. 문항 체크", "3. 결과"];
+  const qIndex = state.questionIndex || 0;
+  const currentQuestion = questions[qIndex];
+  stepLabel.textContent = state.step === 1 ? "2. 문항 " + (qIndex + 1) + " / " + questions.length : labels[state.step];
+  const progress = state.step === 0 ? 12 : state.step === 1 ? 18 + ((qIndex + 1) / questions.length) * 64 : 100;
+  progressBar.style.width = progress + "%";
   backButton.style.visibility = state.step === 0 ? "hidden" : "visible";
-  nextButton.textContent = state.step === 2 ? "결과 보기" : "다음";
-  nextButton.style.display = state.step === 3 ? "none" : "inline-flex";
-  const socialComplete = questions.filter((q) => q.group === "social").every((q) => q.id in state.answers);
-  const behaviorComplete = questions.filter((q) => q.group === "behavior").every((q) => q.id in state.answers);
-  nextButton.disabled = (state.step === 0 && !state.age) || (state.step === 1 && !socialComplete) || (state.step === 2 && !behaviorComplete);
+  nextButton.style.display = state.step === 2 ? "none" : "inline-flex";
+  nextButton.textContent = state.step === 1 && qIndex === questions.length - 1 ? "결과 보기" : "다음";
+  nextButton.disabled = (state.step === 0 && !state.age) || (state.step === 1 && !(currentQuestion.id in state.answers));
 }
 
 function summaryText() {
@@ -189,14 +191,30 @@ sourceToggle?.addEventListener("click", () => {
   sourceToggle.setAttribute("aria-expanded", String(!isOpen));
 });
 nextButton.addEventListener("click", () => {
-  setStep(state.step + 1);
+  if (state.step === 0) {
+    state.questionIndex = 0;
+    renderQuestions();
+    setStep(1);
+  } else if (state.step === 1 && state.questionIndex < questions.length - 1) {
+    state.questionIndex += 1;
+    renderQuestions();
+    updateNav();
+  } else if (state.step === 1) {
+    setStep(2);
+  }
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 backButton.addEventListener("click", () => {
-  setStep(state.step - 1);
+  if (state.step === 1 && state.questionIndex > 0) {
+    state.questionIndex -= 1;
+    renderQuestions();
+    updateNav();
+  } else {
+    setStep(state.step - 1);
+  }
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
-restartButton.addEventListener("click", () => { state.step = 0; state.age = ""; state.answers = {}; renderAges(); renderQuestions(); setStep(0); });
+restartButton.addEventListener("click", () => { state.step = 0; state.age = ""; state.answers = {}; state.questionIndex = 0; renderAges(); renderQuestions(); setStep(0); });
 copyButton.addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(summaryText()); copyButton.textContent = "복사 완료"; }
   catch (error) { copyButton.textContent = "복사 제한됨"; console.warn("Clipboard copy failed", error); }

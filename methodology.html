@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>판정 기준 설명 - 아이 발달 신호 체크</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="source-panel">
+        <p class="eyebrow">근거와 한계</p>
+        <h1>공식 자료 기반 1차 선별 로직</h1>
+        <p>이 도구는 진단 도구가 아니라 보호자가 전문 상담 필요성을 판단하도록 돕는 안내 도구입니다. 문항과 결과 단계는 아래 공식 자료를 기준으로 구성했습니다.</p>
+        <div class="guidance-grid">
+          <article><span>CDC</span><h3>발달 모니터링과 선별</h3><p>CDC는 발달 모니터링을 보호자와 의료진이 아이의 놀이, 학습, 말, 행동, 움직임을 지속적으로 살피는 과정으로 설명하며, 걱정되는 지연이 있으면 의사와 발달 선별을 상의하라고 안내합니다.</p></article>
+          <article><span>AAP</span><h3>권장 선별 시기</h3><p>CDC가 인용한 AAP 권고에 따라 일반 발달·행동 선별은 9·18·30개월, ASD 특이 선별은 18·24개월에 이루어져야 한다는 기준을 결과 안내에 반영했습니다.</p></article>
+          <article><span>M-CHAT-R/F</span><h3>위험도 구간 참고</h3><p>M-CHAT-R/F 공식 기준은 0~2점 낮음, 3~7점 중간, 8~20점 높음으로 나누고, 중간 이상이면 후속 문항 또는 즉시 평가 의뢰를 권합니다. 이 앱은 그 구조만 참고하고 문항은 복제하지 않았습니다.</p></article>
+        </div>
+        <section class="source-panel nested-source">
+          <h2>현재 MVP의 판정 원칙</h2>
+          <ul>
+            <li>발달 퇴행은 점수와 관계없이 빠른 상담 권장으로 처리합니다.</li>
+            <li>18~24개월 및 24~36개월에서 언어 지연과 사회적 관심 공유 어려움이 겹치면 상담 권유 강도를 높입니다.</li>
+            <li>결과는 낮음, 주의, 높음, 긴급 확인 권장으로만 표시하며 자폐 여부를 단정하지 않습니다.</li>
+            <li>M-CHAT-R/F가 적합한 16~30개월 아이는 공식 M-CHAT-R/F 또는 의료기관 선별을 우선하도록 안내합니다.</li>
+          </ul>
+        </section>
+        <div class="source-links">
+          <a href="./index.html">체크 화면으로 돌아가기</a>
+          <a href="https://www.cdc.gov/autism/diagnosis/index.html" target="_blank" rel="noreferrer">CDC Screening</a>
+          <a href="https://www.cdc.gov/act-early/" target="_blank" rel="noreferrer">CDC Learn the Signs</a>
+          <a href="https://www.mchatscreen.com/mchat-rf/scoring/" target="_blank" rel="noreferrer">M-CHAT-R/F Scoring</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

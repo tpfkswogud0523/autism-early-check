@@ -8,7 +8,7 @@
   </head>
   <body>
     <main class="app-shell">
-      <section class="hero" aria-labelledby="page-title">
+      <section class="hero app-view landing-view" id="landingView" aria-labelledby="page-title">
         <div class="hero-copy">
           <p class="eyebrow">영유아 발달 신호 조기 체크</p>
           <h1 id="page-title">걱정되는 행동을 차분히 확인하고, 상담이 필요한지 살펴보세요</h1>
@@ -17,7 +17,7 @@
         </div>
         <img class="hero-image" src="./assets/family-check.svg" alt="보호자와 아이가 그림 카드를 보며 상호작용하는 장면" />
       </section>
-      <section id="checker" class="checker-layout flow-section is-hidden">
+      <section id="checker" class="checker-layout app-view checker-view is-hidden" aria-hidden="true">
         <aside class="side-panel" aria-label="진행 정보">
           <div class="status-box"><span class="status-label">현재 단계</span><strong id="stepLabel">1. 아이 나이</strong></div>
           <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
@@ -29,7 +29,7 @@
             <div class="step" data-step="1"><h2>사회적 소통 신호</h2><p class="step-copy">사람과 관심을 나누는 모습이 얼마나 보이는지 확인합니다.</p><div class="question-list" id="socialQuestions"></div></div>
             <div class="step" data-step="2"><h2>언어·행동·감각 신호</h2><p class="step-copy">언어 지연, 반복 행동, 변화에 대한 어려움을 함께 살펴봅니다.</p><div class="question-list" id="behaviorQuestions"></div></div>
             <div class="step" data-step="3"><h2>결과 확인</h2><div id="resultCard" class="result-card"></div><div class="next-actions"><button type="button" class="ghost-button" id="restartButton">다시 체크</button><button type="button" class="solid-button" id="copyButton">결과 요약 복사</button></div></div>
-            <div class="nav-row"><button type="button" class="ghost-button" id="backButton">이전</button><button type="button" class="solid-button" id="nextButton">다음</button></div>
+            <div class="nav-row"><button type="button" class="ghost-button" id="homeButton">처음으로</button><button type="button" class="ghost-button" id="backButton">이전</button><button type="button" class="solid-button" id="nextButton">다음</button></div>
           </form>
         </section>
       </section>

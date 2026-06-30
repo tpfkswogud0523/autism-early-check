@@ -52,6 +52,11 @@ const nextButton = document.querySelector("#nextButton");
 const restartButton = document.querySelector("#restartButton");
 const copyButton = document.querySelector("#copyButton");
 const resultCard = document.querySelector("#resultCard");
+const startButton = document.querySelector("#startButton");
+const sourceToggle = document.querySelector("#sourceToggle");
+const sourcePreview = document.querySelector("#sourcePreview");
+const checkerSection = document.querySelector("#checker");
+const resultOnlySections = [...document.querySelectorAll(".result-only")];
 
 function renderAges() {
   ageOptions.innerHTML = ages.map((age) => '<button type="button" class="age-option" data-age="' + age.id + '"><strong>' + age.label + '</strong><span>' + age.hint + '</span></button>').join("");
@@ -117,10 +122,22 @@ function renderResult() {
   resultCard.innerHTML = '<span class="risk-badge ' + result.className + '">' + result.level + '</span><h3>' + result.title + '</h3><p>' + result.body + '</p><p><strong>체크 점수:</strong> ' + result.total + '점</p><div class="age-guidance"><strong>선택 나이대 기준 안내</strong><p>' + (ageGuidance[state.age] || "") + '</p><p><strong>공식 선별 안내:</strong> ' + officialScreening + '</p><p><strong>판정 방향:</strong> 진단명이 아니라 상담 필요도를 정리한 것입니다.</p></div><ul>' + result.actions.map((action) => '<li>' + action + '</li>').join("") + '</ul><p><strong>체크된 신호:</strong> ' + checkedText + '</p>';
 }
 
+function beginCheckFlow() {
+  checkerSection?.classList.remove("is-hidden");
+  resultOnlySections.forEach((section) => section.classList.add("is-hidden"));
+  window.setTimeout(() => checkerSection?.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
+}
+
+function updateResultSections() {
+  const showResultSections = state.step === 3;
+  resultOnlySections.forEach((section) => section.classList.toggle("is-hidden", !showResultSections));
+}
+
 function setStep(nextStep) {
   state.step = Math.max(0, Math.min(3, nextStep));
   steps.forEach((step, index) => step.classList.toggle("active", index === state.step));
   if (state.step === 3) renderResult();
+  updateResultSections();
   updateNav();
 }
 
@@ -143,8 +160,20 @@ function summaryText() {
   return ["아이 발달 신호 체크 결과", "나이: " + ageLabel, "권장 단계: " + result.level, "점수: " + result.total + "점", "체크된 신호: " + (checked.length ? checked.join(" / ") : "없음"), "이 결과는 진단이 아니며, 걱정이 지속되면 전문기관 상담을 권합니다."].join("\n");
 }
 
-nextButton.addEventListener("click", () => setStep(state.step + 1));
-backButton.addEventListener("click", () => setStep(state.step - 1));
+startButton?.addEventListener("click", beginCheckFlow);
+sourceToggle?.addEventListener("click", () => {
+  const isOpen = !sourcePreview.hidden;
+  sourcePreview.hidden = isOpen;
+  sourceToggle.setAttribute("aria-expanded", String(!isOpen));
+});
+nextButton.addEventListener("click", () => {
+  setStep(state.step + 1);
+  if (state.step > 0) checkerSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+backButton.addEventListener("click", () => {
+  setStep(state.step - 1);
+  checkerSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+});
 restartButton.addEventListener("click", () => { state.step = 0; state.age = ""; state.answers = {}; renderAges(); renderQuestions(); setStep(0); });
 copyButton.addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(summaryText()); copyButton.textContent = "복사 완료"; }

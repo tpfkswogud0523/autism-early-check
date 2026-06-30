@@ -35,3 +35,10 @@
 - Removed repetitive per-question source labels and kept source explanation in the methodology page.
 - Replaced popup map opening with visible Naver Map and KakaoMap links generated from the entered region and service category.
 - Adjusted score thresholds for the larger 15-item weighted scale.
+
+## 2026-06-30 location search UX refinement
+
+- Added a province-level region example such as 경기도 양주시.
+- Simplified map search keywords to improve result matching.
+- Removed the phrase 링크 만들기 from referral buttons.
+- Added inline guidance that place details are available by selecting a result inside the embedded map.

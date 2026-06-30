@@ -56,6 +56,8 @@ const startButton = document.querySelector("#startButton");
 const sourceToggle = document.querySelector("#sourceToggle");
 const sourcePreview = document.querySelector("#sourcePreview");
 const checkerSection = document.querySelector("#checker");
+const landingView = document.querySelector("#landingView");
+const homeButton = document.querySelector("#homeButton");
 const resultOnlySections = [...document.querySelectorAll(".result-only")];
 
 function renderAges() {
@@ -123,9 +125,28 @@ function renderResult() {
 }
 
 function beginCheckFlow() {
+  landingView?.classList.add("is-hidden");
+  landingView?.setAttribute("aria-hidden", "true");
   checkerSection?.classList.remove("is-hidden");
+  checkerSection?.setAttribute("aria-hidden", "false");
   resultOnlySections.forEach((section) => section.classList.add("is-hidden"));
-  window.setTimeout(() => checkerSection?.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
+  setStep(0);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function returnHome() {
+  checkerSection?.classList.add("is-hidden");
+  checkerSection?.setAttribute("aria-hidden", "true");
+  resultOnlySections.forEach((section) => section.classList.add("is-hidden"));
+  landingView?.classList.remove("is-hidden");
+  landingView?.setAttribute("aria-hidden", "false");
+  state.step = 0;
+  state.age = "";
+  state.answers = {};
+  renderAges();
+  renderQuestions();
+  updateNav();
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function updateResultSections() {
@@ -161,6 +182,7 @@ function summaryText() {
 }
 
 startButton?.addEventListener("click", beginCheckFlow);
+homeButton?.addEventListener("click", returnHome);
 sourceToggle?.addEventListener("click", () => {
   const isOpen = !sourcePreview.hidden;
   sourcePreview.hidden = isOpen;
@@ -168,11 +190,11 @@ sourceToggle?.addEventListener("click", () => {
 });
 nextButton.addEventListener("click", () => {
   setStep(state.step + 1);
-  if (state.step > 0) checkerSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 backButton.addEventListener("click", () => {
   setStep(state.step - 1);
-  checkerSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 restartButton.addEventListener("click", () => { state.step = 0; state.age = ""; state.answers = {}; renderAges(); renderQuestions(); setStep(0); });
 copyButton.addEventListener("click", async () => {

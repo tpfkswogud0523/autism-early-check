@@ -22,3 +22,9 @@
 - Project: `autism-early-check`
 
 브라우저 런타임 오류는 Sentry 프로젝트로 전송되도록 연결되어 있습니다.
+
+## 2026-06-30 scale update
+
+- Replaced yes/no answers with a 4-step frequency scale: 전혀 아니다, 조금 그렇다, 꽤 그렇다, 매우 그렇다.
+- Scores now use 0~3 points per item, multiplied by clinical-signal weights.
+- Developmental regression remains a separate urgent flag when marked 꽤 그렇다 or 매우 그렇다.

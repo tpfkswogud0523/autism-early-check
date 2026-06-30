@@ -28,3 +28,10 @@
 - Replaced yes/no answers with a 4-step frequency scale: 전혀 아니다, 조금 그렇다, 꽤 그렇다, 매우 그렇다.
 - Scores now use 0~3 points per item, multiplied by clinical-signal weights.
 - Developmental regression remains a separate urgent flag when marked 꽤 그렇다 or 매우 그렇다.
+
+## 2026-06-30 question and referral refinement
+
+- Expanded the MVP to a 15-item home screening guide.
+- Removed repetitive per-question source labels and kept source explanation in the methodology page.
+- Replaced popup map opening with visible Naver Map and KakaoMap links generated from the entered region and service category.
+- Adjusted score thresholds for the larger 15-item weighted scale.

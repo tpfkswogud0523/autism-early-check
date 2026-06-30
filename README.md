@@ -42,3 +42,11 @@
 - Simplified map search keywords to improve result matching.
 - Removed the phrase 링크 만들기 from referral buttons.
 - Added inline guidance that place details are available by selecting a result inside the embedded map.
+
+## 2026-06-30 guided page flow update
+
+- Reworked the MVP so the landing page is shown first.
+- The checklist appears only after clicking the start button.
+- Referral search, usage guidance, and methodology appear after the result step.
+- Added a collapsible source/limitation preview on the landing page.
+- Added subtle page and step transition animations.

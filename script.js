@@ -160,7 +160,7 @@ document.querySelectorAll("[data-search]").forEach((button) => {
     const rawQuery = (region + " " + button.dataset.search).trim();
     const query = encodeURIComponent(rawQuery);
     const googleEmbed = "https://www.google.com/maps?q=" + query + "&output=embed";
-    results.innerHTML = '<strong>검색어: ' + rawQuery + '</strong><div class="embedded-map"><iframe title="상담처 지도 검색 결과" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="' + googleEmbed + '"></iframe></div><div class="map-link-row"><a class="primary-link" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + query + '">구글 지도에서 크게 보기</a><a class="secondary-link" target="_blank" rel="noreferrer" href="https://map.naver.com/p/search/' + query + '">네이버 지도</a><a class="secondary-link" target="_blank" rel="noreferrer" href="https://map.kakao.com/?q=' + query + '">카카오맵</a></div>';
+    results.innerHTML = '<strong>검색어: ' + rawQuery + '</strong><p class="map-help">지도 안의 장소 이름이나 핀을 누르면 주소, 전화번호, 영업 정보 등 지도 서비스가 제공하는 기본 정보를 볼 수 있습니다.</p><div class="embedded-map"><iframe title="상담처 지도 검색 결과" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="' + googleEmbed + '"></iframe></div><div class="map-link-row"><a class="primary-link" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + query + '">구글 지도에서 크게 보기</a><a class="secondary-link" target="_blank" rel="noreferrer" href="https://map.naver.com/p/search/' + query + '">네이버 지도</a><a class="secondary-link" target="_blank" rel="noreferrer" href="https://map.kakao.com/?q=' + query + '">카카오맵</a></div>';
   });
 });
 

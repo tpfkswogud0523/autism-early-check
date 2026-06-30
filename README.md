@@ -50,3 +50,9 @@
 - Referral search, usage guidance, and methodology appear after the result step.
 - Added a collapsible source/limitation preview on the landing page.
 - Added subtle page and step transition animations.
+
+## 2026-06-30 one-question-at-a-time flow
+
+- Changed the checklist from grouped question pages to one question per screen.
+- Progress now reflects the current question number across all 15 items.
+- Back and next controls move through individual questions before showing results.

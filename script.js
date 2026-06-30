@@ -137,8 +137,7 @@ function summaryText() {
   const result = calculateResult();
   const ageLabel = ages.find((age) => age.id === state.age)?.label || "미선택";
   const checked = questions.filter((question) => (state.answers[question.id] ?? 0) > 0).map((question) => question.title + "(" + scaleOptions[state.answers[question.id]].label + ")");
-  return ["아이 발달 신호 체크 결과", "나이: " + ageLabel, "권장 단계: " + result.level, "점수: " + result.total + "점", "체크된 신호: " + (checked.length ? checked.join(" / ") : "없음"), "이 결과는 진단이 아니며, 걱정이 지속되면 전문기관 상담을 권합니다."].join("
-");
+  return ["아이 발달 신호 체크 결과", "나이: " + ageLabel, "권장 단계: " + result.level, "점수: " + result.total + "점", "체크된 신호: " + (checked.length ? checked.join(" / ") : "없음"), "이 결과는 진단이 아니며, 걱정이 지속되면 전문기관 상담을 권합니다."].join("\n");
 }
 
 nextButton.addEventListener("click", () => setStep(state.step + 1));

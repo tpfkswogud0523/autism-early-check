@@ -22,18 +22,21 @@ const ageGuidance = {
 };
 
 const questions = [
-  { group: "social", id: "nameResponse", title: "이름을 불러도 반응이 적거나 일정하지 않다", detail: "CDC는 9개월 무렵 이름 반응 부족을 사회적 의사소통 관련 신호 중 하나로 제시합니다.", weight: 2, basis: "CDC" },
-  { group: "social", id: "eyeContact", title: "눈맞춤, 표정 주고받기, 미소 반응이 또래보다 적다", detail: "눈맞춤 회피나 표정 반응 부족은 사회적 상호작용 어려움과 관련될 수 있습니다.", weight: 2, basis: "CDC" },
-  { group: "social", id: "gesture", title: "안녕 손 흔들기, 고개 끄덕임, 손짓 같은 몸짓이 적다", detail: "CDC는 12개월 무렵 몸짓이 거의 없거나 적은 경우를 관찰할 신호로 안내합니다.", weight: 2, basis: "CDC" },
-  { group: "social", id: "pointing", title: "흥미로운 것을 손가락으로 가리키거나 보여주는 행동이 적다", detail: "18개월 무렵 관심 공유를 위한 가리키기가 적으면 전문 상담을 고려할 수 있습니다.", weight: 3, basis: "CDC" },
-  { group: "social", id: "sharedAttention", title: "다른 사람이 보는 것, 놀라는 것, 가리키는 것에 관심을 잘 보이지 않는다", detail: "사람과 관심을 공유하기보다 혼자 보는 대상에 오래 머무는지 확인합니다.", weight: 2, basis: "CDC" },
-  { group: "social", id: "peerPlay", title: "또래 아이에게 관심을 보이거나 함께 놀이에 참여하는 모습이 적다", detail: "36개월 전후에는 다른 아이를 알아차리고 놀이에 참여하는지도 중요한 관찰점입니다.", weight: 2, basis: "CDC" },
-  { group: "behavior", id: "languageDelay", title: "말, 옹알이, 두 단어 표현이 나이에 비해 늦다고 느껴진다", detail: "언어 지연은 ASD만의 신호는 아니지만 발달 평가가 필요한 흔한 이유입니다.", weight: 3, basis: "CDC/AAP" },
-  { group: "behavior", id: "repetitive", title: "손 흔들기, 빙글빙글 돌기, 물건 줄 세우기 같은 반복 행동이 자주 보인다", detail: "제한적·반복적 행동은 ASD 관련 핵심 영역 중 하나입니다.", weight: 2, basis: "CDC" },
-  { group: "behavior", id: "restrictedInterest", title: "바퀴, 빛, 특정 영상, 숫자·글자 등 일부 대상에 과하게 몰입한다", detail: "물건의 일부나 특정 자극에 강하게 몰입하는 양상을 확인합니다.", weight: 2, basis: "CDC" },
-  { group: "behavior", id: "sensory", title: "소리, 촉감, 냄새, 옷감, 음식 식감에 대한 반응이 유난히 강하거나 둔하다", detail: "감각 반응 차이가 일상생활을 어렵게 만드는지 함께 봅니다.", weight: 1, basis: "CDC" },
-  { group: "behavior", id: "changeDistress", title: "일상 순서나 환경이 바뀌면 심하게 힘들어한다", detail: "같은 방식에 대한 고집과 변화 어려움은 반복·제한 행동 영역과 관련될 수 있습니다.", weight: 1, basis: "CDC" },
-  { group: "behavior", id: "regression", title: "이전에 하던 말, 눈맞춤, 놀이, 사회적 반응이 줄거나 사라졌다", detail: "발달 퇴행은 나이와 점수에 관계없이 빠른 상담이 필요한 신호입니다.", weight: 5, urgent: true, basis: "CDC/AAP" },
+  { group: "social", id: "nameResponse", title: "이름을 불러도 반응이 적거나 일정하지 않다", detail: "소리가 들리는데도 사람의 부름에 잘 돌아보지 않는 모습이 반복됩니다.", weight: 2 },
+  { group: "social", id: "eyeContact", title: "눈맞춤, 표정 주고받기, 미소 반응이 또래보다 적다", detail: "보호자와 즐거움을 나누는 표정이나 시선 교환이 드뭅니다.", weight: 2 },
+  { group: "social", id: "gesture", title: "안녕 손 흔들기, 고개 끄덕임, 손짓 같은 몸짓이 적다", detail: "말 대신 쓰는 몸짓이나 표정 표현이 또래보다 적은지 봅니다.", weight: 2 },
+  { group: "social", id: "pointing", title: "흥미로운 것을 손가락으로 가리키거나 보여주는 행동이 적다", detail: "무언가를 함께 보자고 가리키거나 보여주는 행동이 적습니다.", weight: 3 },
+  { group: "social", id: "sharedAttention", title: "다른 사람이 보는 것, 놀라는 것, 가리키는 것에 관심을 잘 보이지 않는다", detail: "사람과 관심을 공유하기보다 혼자 보는 대상에 오래 머무는지 확인합니다.", weight: 2 },
+  { group: "social", id: "imitation", title: "박수, 빠이빠이, 간단한 동작 따라 하기가 적다", detail: "사람을 보고 따라 하며 배우는 상호작용이 얼마나 보이는지 확인합니다.", weight: 2 },
+  { group: "social", id: "pretendPlay", title: "먹이는 척, 재우는 척 같은 상상놀이가 적다", detail: "나이에 맞는 흉내놀이와 상징놀이가 거의 보이지 않는지 살펴봅니다.", weight: 2 },
+  { group: "social", id: "peerPlay", title: "또래 아이에게 관심을 보이거나 함께 놀이에 참여하는 모습이 적다", detail: "다른 아이를 알아차리고 놀이에 참여하는지도 중요한 관찰점입니다.", weight: 2 },
+  { group: "behavior", id: "languageDelay", title: "말, 옹알이, 두 단어 표현이 나이에 비해 늦다고 느껴진다", detail: "언어 지연은 ASD만의 신호는 아니지만 발달 평가가 필요한 흔한 이유입니다.", weight: 3 },
+  { group: "behavior", id: "communicationNeed", title: "원하는 것을 말이나 손짓보다 울음, 끌고 가기로 표현한다", detail: "사람에게 의도를 전달하는 방식이 제한적인지 확인합니다.", weight: 2 },
+  { group: "behavior", id: "repetitive", title: "손 흔들기, 빙글빙글 돌기, 물건 줄 세우기 같은 반복 행동이 자주 보인다", detail: "반복 행동 자체보다 빈도, 강도, 중단 어려움이 중요합니다.", weight: 2 },
+  { group: "behavior", id: "restrictedInterest", title: "바퀴, 빛, 특정 영상, 숫자·글자 등 일부 대상에 과하게 몰입한다", detail: "물건의 일부나 특정 자극에 강하게 몰입하는 양상을 확인합니다.", weight: 2 },
+  { group: "behavior", id: "sensory", title: "소리, 촉감, 냄새, 옷감, 음식 식감에 대한 반응이 유난히 강하거나 둔하다", detail: "감각 반응 차이가 일상생활을 어렵게 만드는지 함께 봅니다.", weight: 1 },
+  { group: "behavior", id: "changeDistress", title: "일상 순서나 환경이 바뀌면 심하게 힘들어한다", detail: "예상 밖의 변화에 긴 시간 진정하기 어려운 모습이 있는지 봅니다.", weight: 1 },
+  { group: "behavior", id: "regression", title: "이전에 하던 말, 눈맞춤, 놀이, 사회적 반응이 줄거나 사라졌다", detail: "발달 퇴행은 나이와 점수에 관계없이 빠른 상담이 필요한 신호입니다.", weight: 5, urgent: true },
 ];
 
 const state = { step: 0, age: "", answers: {} };
@@ -70,7 +73,7 @@ function questionMarkup(question) {
     return '<button type="button" class="' + active + '" data-answer="' + option.value + '">' + option.label + '</button>';
   }).join("");
 
-  return '<article class="question-card ' + selected + '" data-question="' + question.id + '"><div class="question-top"><div><h3>' + question.title + '</h3><p>' + question.detail + '</p><ul class="basis-list"><li>근거 축: ' + question.basis + '</li></ul></div><div class="toggle scale-toggle" role="group" aria-label="' + question.title + '">' + buttons + '</div></div></article>';
+  return '<article class="question-card ' + selected + '" data-question="' + question.id + '"><div class="question-top"><div><h3>' + question.title + '</h3><p>' + question.detail + '</p></div><div class="toggle scale-toggle" role="group" aria-label="' + question.title + '">' + buttons + '</div></div></article>';
 }
 
 function renderQuestions() {
@@ -97,10 +100,10 @@ function calculateResult() {
   if (regression >= 2) {
     return { level: "긴급 확인 권장", className: "risk-urgent", title: "발달 퇴행 신호가 있어 빠른 상담을 권합니다", body: "이전에 하던 말이나 사회적 반응이 뚜렷하게 줄어든 경우에는 기다리기보다 소아청소년과, 소아정신건강의학과, 발달 전문기관에 빠르게 문의하는 것이 좋습니다.", total: adjustedTotal, actions: ["가까운 소아청소년과 또는 발달 전문기관 예약", "영유아검진/K-DST 결과와 관찰 기록 준비", "어린이집 또는 가족이 본 변화 시점 정리"] };
   }
-  if (adjustedTotal >= 30) {
+  if (adjustedTotal >= 38) {
     return { level: "높음", className: "risk-high", title: "전문 발달 평가를 받아보는 것이 좋습니다", body: "여러 영역에서 의심 신호가 겹쳐 보입니다. 이 결과는 진단이 아니지만, 공식 선별과 전문 평가로 현재 발달 상태를 확인해 볼 필요가 큽니다.", total: adjustedTotal, actions: ["소아청소년과 또는 발달센터 상담 예약", "16~30개월이면 M-CHAT-R/F 같은 공식 선별 도구 확인", "언어·사회성·놀이 관찰 기록 작성"] };
   }
-  if (adjustedTotal >= 14) {
+  if (adjustedTotal >= 18) {
     return { level: "주의", className: "risk-watch", title: "가까운 시일 내 상담을 받아보세요", body: "일부 발달 신호가 또래와 다르게 보일 수 있습니다. 보호자 관찰만으로 단정하지 말고 전문가와 함께 확인하는 편이 안전합니다.", total: adjustedTotal, actions: ["다음 영유아검진 때 반드시 질문", "2~4주간 반복되는 행동 기록", "걱정이 지속되면 발달 상담 예약"] };
   }
   return { level: "낮음", className: "risk-low", title: "현재 응답만으로는 높은 의심 단계는 아닙니다", body: "다만 아이의 발달은 계속 변합니다. 보호자가 걱정되는 신호를 반복해서 본다면 점수와 관계없이 상담을 받아도 괜찮습니다.", total: adjustedTotal, actions: ["정기 영유아검진 유지", "새로운 걱정 신호가 생기면 다시 체크", "발달 퇴행이 보이면 즉시 상담"] };
@@ -152,9 +155,11 @@ copyButton.addEventListener("click", async () => {
 document.querySelectorAll("[data-search]").forEach((button) => {
   button.addEventListener("click", () => {
     const regionInput = document.querySelector("#regionInput");
+    const results = document.querySelector("#mapResults");
     const region = (regionInput?.value || "").trim();
-    const query = encodeURIComponent((region + " " + button.dataset.search).trim());
-    window.open("https://map.naver.com/p/search/" + query, "_blank", "noopener,noreferrer");
+    const rawQuery = (region + " " + button.dataset.search).trim();
+    const query = encodeURIComponent(rawQuery);
+    results.innerHTML = '<strong>검색어: ' + rawQuery + '</strong><div class="map-link-row"><a class="primary-link" target="_blank" rel="noreferrer" href="https://map.naver.com/p/search/' + query + '">네이버 지도에서 보기</a><a class="secondary-link" target="_blank" rel="noreferrer" href="https://map.kakao.com/?q=' + query + '">카카오맵에서 보기</a></div>';
   });
 });
 
